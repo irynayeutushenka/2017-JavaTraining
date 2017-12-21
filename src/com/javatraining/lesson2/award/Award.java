@@ -81,10 +81,10 @@ public class Award {
     public void calculateQuantity(Nominee nominee, Award[] awardArrayPerRecipients) {
 
         Random rand1 = new Random();
-        double C = (rand1.nextInt(21) - 10) / 10.0; // a random decimal i.e. 5% = 0.05
+        double c = (rand1.nextInt(21) - 10) / 10.0; // a random decimal i.e. 5% = 0.05
 
         Random rand2 = new Random();
-        int Z = rand2.nextInt(40) + 1; // a random whole number i.e. 3
+        int z = rand2.nextInt(40) + 1; // a random whole number i.e. 3
 
         int power = 2; //возведение в степень 2
 
@@ -92,10 +92,10 @@ public class Award {
 
             double population = a.countPopulation(awardArrayPerRecipients);
 
-            double P = a.getValue(); //award value
-            double D = (Math.pow(Z, power) * P * (1 - P)) / Math.pow(C, power); //(Z^2*(P)*(1-P))/(C^2)
+            double v = a.getValue(); //award value
+            double m = (Math.pow(z, power) * v * (1 - v)) / Math.pow(c, power); //(Z^2*(P)*(1-P))/(C^2)
 
-            double quantity = D /  (1 + (((D-1)/population)));
+            double quantity = m /  (1 + (((m-1)/population)));
             System.out.println(String.format("Recipient: %s, Award Value - %s, Population - %s, Calculated Quantity - %s", nominee.getName(), a.getValue(), population, quantity));
         }
     }
