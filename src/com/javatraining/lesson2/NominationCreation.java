@@ -10,9 +10,9 @@ public class NominationCreation {
         Award award1 = new Award(100); //award with default currency without SOLI
         Award award2 = new Award(100, "EUR"); //award with specified currency without SOLI
         Award award3 = new Award(50, 5); //award without SOLI
-        Award award4 = new Award(500, 8.5); //award with default currency with SOLI for 2 recipients
-        Award award5 = new Award(200, 3.5); //award with default currency with SOLI
-        Award award6 = new Award(500, 7.5); //award with default currency with SOLI
+        Award award4 = new Award(500, 0.7f); //award with default currency with SOLI for 2 recipients
+        Award award5 = new Award(200, 1.2f); //award with default currency with SOLI
+        Award award6 = new Award(500, 10f); //award with default currency with SOLI
 
 
         Nominee nominee1 = new Nominee("Pete");

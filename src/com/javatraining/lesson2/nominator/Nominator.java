@@ -7,8 +7,8 @@
 
 package com.javatraining.lesson2.nominator;
 
-        import com.javatraining.lesson2.award.Award;
-        import com.javatraining.lesson2.nominee.Nominee;
+import com.javatraining.lesson2.award.Award;
+import com.javatraining.lesson2.nominee.Nominee;
 
 
 public class Nominator {
@@ -18,12 +18,48 @@ public class Nominator {
     }
 
     private String name;
+    private int nominatorAwardQuantityLimit;
+    private double nominatorAwardAmountLimit;
+    private double nominatorAwardAmount;
+    private int nominatorAwardQuantity;
+
+    public double getNominatorAwardAmount() {
+        return nominatorAwardAmount;
+    }
+
+    public void setNominatorAwardAmount(double nominatorAwardAmount) {
+        this.nominatorAwardAmount = nominatorAwardAmount;
+    }
+
+    public int getNominatorAwardQuantity() {
+        return nominatorAwardQuantity;
+    }
+
+    public void setNominatorAwardQuantity(int nominatorAwardQuantity) {
+        this.nominatorAwardQuantity = nominatorAwardQuantity;
+    }
 
     public Nominator() {
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getNominatorAwardQuantityLimit() {
+        return nominatorAwardQuantityLimit;
+    }
+
+    public void setNominatorAwardQuantityLimit(int nominatorAwardQuantityLimit) {
+        this.nominatorAwardQuantityLimit = nominatorAwardQuantityLimit;
+    }
+
+    public double getNominatorAwardAmountLimit() {
+        return nominatorAwardAmountLimit;
+    }
+
+    public void setNominatorAwardAmountLimit(double nominatorAwardAmountLimit) {
+        this.nominatorAwardAmountLimit = nominatorAwardAmountLimit;
     }
 
     public void nominate(Award award, Nominee[] nominees) {

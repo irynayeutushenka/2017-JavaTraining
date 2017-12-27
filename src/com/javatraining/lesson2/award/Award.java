@@ -4,7 +4,7 @@
  * приватное финальное целочисленное поле value, которое инициализируется из конструктора
  * публичный геттер для поля value
  * Каждый класс должен содержать статические блоки инициализации, в которых выводится на консоль информации об инициализации класса
-
+ * <p>
  * Lesson 3
  * Для каждого из 3 сотрудников, для каждой аварды без соли рассчитать по формуле
  * quantity = ((Z^2*(P)*(1-P))/(C^2)) / (1 + ((((Z^2*(P)*(1-P ))/(C^2))-1)/population))
@@ -34,14 +34,14 @@ public class Award {
 
     private final int value;
     private String currency;
-    private double soli;
+    private float soli;
 
     public Award(int value) {
         this.value = value;
         this.currency = "USD";
     }
 
-    public Award(int value, double soli) {
+    public Award(int value, float soli) {
         this.value = value;
         this.currency = "USD";
         this.soli = soli;
@@ -60,11 +60,11 @@ public class Award {
         return currency;
     }
 
-    public double getSoli() {
+    public float getSoli() {
         return soli;
     }
 
-    public void setSoli(double soli) {
+    public void setSoli(float soli) {
         this.soli = soli;
     }
 
@@ -84,7 +84,7 @@ public class Award {
         double c = (rand1.nextInt(21) - 10) / 10.0; // a random decimal i.e. 5% = 0.05
 
         Random rand2 = new Random();
-        int z = rand2.nextInt(40) + 1; // a random whole number i.e. 3
+        int z = rand2.nextInt(10) + 1; // a random whole number i.e. 3
 
         int power = 2; //возведение в степень 2
 
@@ -93,11 +93,13 @@ public class Award {
             double population = a.countPopulation(awardArrayPerRecipients);
 
             double v = a.getValue(); //award value
-            double m = (Math.pow(z, power) * v * (1 - v)) / Math.pow(c, power); //(Z^2*(P)*(1-P))/(C^2)
+            double pz = Math.pow(z, power); // (Z^2)
+            double d = pz * v * (1 - v); // (Z^2*(P)*(1-P))
+            double pc = Math.pow(c, power); ///(C^2)
+            double m = d / pc;
 
-            double quantity = m /  (1 + (((m-1)/population)));
+            double quantity = m / (1 + (((m - 1) / population)));
             System.out.println(String.format("Recipient: %s, Award Value - %s, Population - %s, Calculated Quantity - %s", nominee.getName(), a.getValue(), population, quantity));
         }
     }
 }
-
