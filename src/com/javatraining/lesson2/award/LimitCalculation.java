@@ -6,7 +6,7 @@ import com.javatraining.lesson2.nominee.Nominee;
 public class LimitCalculation {
 
     // Nominator дает авадру Nominee пока не достигнет nominatorAwardAmountLimit
-    public void checkNominatorAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
+    public static void checkNominatorAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
         double nominatorAmount = nominator.getNominatorAwardAmount();
         if ((nominatorAmount + award.getValue()) <= nominator.getNominatorAwardAmountLimit()) {
             checkNominatorAwardQuantityLimit(award, nominator, nomineesArray);
@@ -16,23 +16,21 @@ public class LimitCalculation {
     }
 
     // Nominator дает авадру Nominee пока не достигнет nominatorAwardQuantityLimit
-    public void checkNominatorAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
+    public static void checkNominatorAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
         int nominatorAwardQuantity = nominator.getNominatorAwardQuantity();
         if ((nominatorAwardQuantity + 1) <= nominator.getNominatorAwardQuantityLimit()) {
             checkNomineeAwardAmountLimit(award, nominator, nomineesArray);
-            //nominatorAwardQuantity++;
         } else {
             System.out.println(String.format("AwardQuantityLimit for nominator is reached, Award Quantity Received by Nominator - %s", nominatorAwardQuantity));
         }
     }
 
     // Nominator дает авадру Nominee пока не достигнет nomineeAwardAmountLimit
-    public void checkNomineeAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
+    public static void checkNomineeAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
         for (Nominee n : nomineesArray) {
             double nomineeAmount = n.getNomineeAwardAmount();
             if ((nomineeAmount + award.getValue()) <= n.getNomineeAwardAmountLimit()) {
                 checkNomineeAwardQuantityLimit(award, nominator, nomineesArray);
-                //nomineeAmount += award.getValue();
             } else {
                 System.out.println(String.format("AwardAmountLimit for recipient is reached, Award Amount Received by Recipient - %s", nomineeAmount));
             }
@@ -40,7 +38,7 @@ public class LimitCalculation {
     }
 
     // Nominator дает авадру Nominee пока не достигнет nomineeAwardQuantityLimit
-    public void checkNomineeAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
+    public static void checkNomineeAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
         for (Nominee n : nomineesArray) {
             int nomineeAwardQuantity = n.getNomineeAwardQuantity();
             if ((nomineeAwardQuantity + 1) <= n.getNomineeAwardQuantityLimit()) {

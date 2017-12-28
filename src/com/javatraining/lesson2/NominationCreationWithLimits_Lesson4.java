@@ -23,10 +23,9 @@ public class NominationCreationWithLimits_Lesson4 {
         nominee1.setNomineeAwardQuantityLimit(2);
         nominee1.setNomineeAwardAmountLimit(1000.5);
 
-        LimitCalculation a = new LimitCalculation();
-        a.checkNominatorAwardAmountLimit(award1, nominator1, nomineesArray1);
-        a.checkNominatorAwardAmountLimit(award2, nominator1, nomineesArray1);
-        a.checkNominatorAwardAmountLimit(award3, nominator1, nomineesArray1);
-        a.checkNominatorAwardAmountLimit(award4, nominator1, nomineesArray1);
+        LimitCalculation.checkNominatorAwardAmountLimit(award1, nominator1, nomineesArray1);
+        LimitCalculation.checkNominatorAwardAmountLimit(award2, nominator1, nomineesArray1);
+        LimitCalculation.checkNominatorAwardAmountLimit(award3, nominator1, nomineesArray1);
+        LimitCalculation.checkNominatorAwardAmountLimit(award4, nominator1, nomineesArray1);
     }
 }
