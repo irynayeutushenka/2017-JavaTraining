@@ -42,7 +42,7 @@ public class LimitCalculation {
         for (Nominee n : nomineesArray) {
             int nomineeAwardQuantity = n.getNomineeAwardQuantity();
             if ((nomineeAwardQuantity + 1) <= n.getNomineeAwardQuantityLimit()) {
-                n.receiveAward(award);
+                nominator.nominate(award, nomineesArray);
                 nominator.setNominatorAwardAmount(nominator.getNominatorAwardAmount() + award.getValue());
                 nominator.setNominatorAwardQuantity(nominator.getNominatorAwardQuantity() + 1);
                 n.setNomineeAwardAmount(n.getNomineeAwardAmount() + award.getValue());
