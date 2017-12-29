@@ -1,8 +1,7 @@
 /**
- * Nominee:
- * приватное строковое поле name, которое инициализируется из конструктора
- * публичный метод receiveAward, принимающий объект класса Award. Метод должен выводить значение аварды на консоль
- * Каждый класс должен содержать статические блоки инициализации, в которых выводится на консоль информации об инициализации класса
+ * Represents a recipient of the award.
+ *
+ * @author Iryna_Yeutushenka
  */
 
 
@@ -23,24 +22,8 @@ public class Nominee {
     private final String name;
     private int nomineeAwardQuantityLimit;
     private double nomineeAwardAmountLimit;
-    private double nomineeAwardAmount;
-    private int nomineeAwardQuantity;
-
-    public double getNomineeAwardAmount() {
-        return nomineeAwardAmount;
-    }
-
-    public void setNomineeAwardAmount(double nomineeAwardAmount) {
-        this.nomineeAwardAmount = nomineeAwardAmount;
-    }
-
-    public int getNomineeAwardQuantity() {
-        return nomineeAwardQuantity;
-    }
-
-    public void setNomineeAwardQuantity(int nomineeAwardQuantity) {
-        this.nomineeAwardQuantity = nomineeAwardQuantity;
-    }
+    private double nomineeReceivedAwardAmount;
+    private int nomineeReceivedAwardQuantity;
 
     public Nominee(String name) {
         this.name = name;
@@ -66,13 +49,37 @@ public class Nominee {
         this.nomineeAwardAmountLimit = nomineeAwardAmountLimit;
     }
 
+    public double getNomineeReceivedAwardAmount() {
+        return nomineeReceivedAwardAmount;
+    }
+
+    public void setNomineeReceivedAwardAmount(double nomineeReceivedAwardAmount) {
+        this.nomineeReceivedAwardAmount = nomineeReceivedAwardAmount;
+    }
+
+    public int getNomineeReceivedAwardQuantity() {
+        return nomineeReceivedAwardQuantity;
+    }
+
+    public void setNomineeReceivedAwardQuantity(int nomineeReceivedAwardQuantity) {
+        this.nomineeReceivedAwardQuantity = nomineeReceivedAwardQuantity;
+    }
+
+    /**
+     * Method provides information about award to be received by the recipient and applied soli.
+     *
+     * @param award - chosen award for nomination
+     */
     public void receiveAward(Award award) {
+        float awardValueWithSoli = award.getValue() * award.getSoli();
         if (award.getSoli() == 0.0f) {
             System.out.println(String.format("Award Details for Recipient: Award Value - %s, Award Currency - %s. No SOLI applied", award.getValue(), award.getCurrency()));
         } else if (award.getSoli() < 1.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Gone - %s.", (award.getValue() * award.getSoli()), award.getCurrency(), award.getSoli(), (100 - (award.getSoli() * 100) + "%")));
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Gone - %s.", awardValueWithSoli, award.getCurrency(), award.getSoli(), (100 - (award.getSoli() * 100) + "%")));
         } else if (award.getSoli() > 1.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Added - %s.", (award.getValue() * award.getSoli()), award.getCurrency(), award.getSoli(), ((award.getSoli() * 100 - 100) + "%")));
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Added - %s.", awardValueWithSoli, award.getCurrency(), award.getSoli(), ((award.getSoli() * 100 - 100) + "%")));
+        } else if (award.getSoli() == 1.0f) {
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Award value hasn't changed.", awardValueWithSoli, award.getCurrency(), award.getSoli()));
         }
     }
 }

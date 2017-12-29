@@ -1,3 +1,9 @@
+/**
+ * Runner for creation nominations and calculations of soli Quantity
+ *
+ * @author Iryna_Yeutushenka
+ */
+
 package com.javatraining.lesson2;
 
 import com.javatraining.lesson2.award.Award;
@@ -39,8 +45,66 @@ public class NominationCreation {
         Award[] awardArrayPerRecipient2 = new Award[]{award2, award4};
         Award[] awardArrayPerRecipient3 = new Award[]{award3, award6};
 
-        award1.calculateQuantity(nominee1, awardArrayPerRecipient1);
-        award2.calculateQuantity(nominee2, awardArrayPerRecipient2);
-        award3.calculateQuantity(nominee3, awardArrayPerRecipient3);
+
+        int populationForRecipient1 = countPopulation(awardArrayPerRecipient1);
+        double quantity1 = award1.calculateQuantity(populationForRecipient1);
+        double quantity2 = award4.calculateQuantity(populationForRecipient1);
+
+        int populationForRecipient2 = countPopulation(awardArrayPerRecipient2);
+        double quantity3 = award2.calculateQuantity(populationForRecipient2);
+        double quantity4 = award4.calculateQuantity(populationForRecipient2);
+
+        int populationForRecipient3 = countPopulation(awardArrayPerRecipient3);
+        double quantity5 = award3.calculateQuantity(populationForRecipient3);
+        double quantity6 = award6.calculateQuantity(populationForRecipient3);
+
+
+        /**
+         * Comparison of quantities of the awards for the same recipient
+         */
+        if (quantity1 > quantity2) {
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is greater than quantity of award4 of the Recipient 1 (%s)", quantity1, quantity2));
+        } else if (quantity1 < quantity2) {
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is less than quantity of award4 of the Recipient 1 (%s)", quantity1, quantity2));
+        } else if (quantity1 == quantity2) {
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 1 (%s)", quantity1, quantity2));
+        }
+
+        /**
+         * Comparison of quantities of the awards for the different recipients
+         */
+        if (quantity3 >= quantity5) {
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is greater or equal than quantity of award3 of the Recipient 3 (%s)", quantity3, quantity5));
+        } else if (quantity3 <= quantity5) {
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is less or equal than quantity of award3 of the Recipient 3 (%s)", quantity3, quantity5));
+        }else if (quantity3 != quantity5) {
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is not equal than quantity of award3 of the Recipient 3 (%s)", quantity3, quantity5));
+        }
+
+        /**
+         * Comparison of quantities of the awards for the different recipients
+         */
+        if ((quantity1 == quantity4) && (quantity1 == quantity5)) {
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s), quantity of the award4 of the Recipient 2 (%s) and quantity of the award3 of the Recipient 3 (%s) are equal", quantity1, quantity4, quantity5));
+        } else if ((quantity1 == quantity4) || (quantity1 == quantity5)) {
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 2 (%s) or to quantity of the award3 of the Recipient 3 (%s)", quantity1, quantity4, quantity5));
+        }
+
     }
-}
+
+    /**
+     * Method to calculate population to be used in calculateQuantity method
+     *
+     * @param awardArrayPerRecipient - list of awards received by the recipient
+     * @return population - total count of employee's awards without soli
+     */
+    private static int countPopulation(Award awardArrayPerRecipient[]) {
+        int count = 0;
+        for (Award a : awardArrayPerRecipient) {
+            if (a.getSoli() != 0.0f) {
+                count++;
+            }
+        }
+        return count;
+    }
+        }

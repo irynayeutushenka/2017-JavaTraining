@@ -1,8 +1,7 @@
 /**
- * Nominator:
- * приватное строковое поле name, которое инициализируется из конструктора
- * публичный метод nominate, принимающий объекты классов Nominee и Award.
- * Метод должен выводить на консоль кому и какого размера выдана аварда
+ * Represents a nominator of the award.
+ *
+ * @author Iryna_Yeutushenka
  */
 
 package com.javatraining.lesson2.nominator;
@@ -20,24 +19,8 @@ public class Nominator {
     private String name;
     private int nominatorAwardQuantityLimit;
     private double nominatorAwardAmountLimit;
-    private double nominatorAwardAmount;
-    private int nominatorAwardQuantity;
-
-    public double getNominatorAwardAmount() {
-        return nominatorAwardAmount;
-    }
-
-    public void setNominatorAwardAmount(double nominatorAwardAmount) {
-        this.nominatorAwardAmount = nominatorAwardAmount;
-    }
-
-    public int getNominatorAwardQuantity() {
-        return nominatorAwardQuantity;
-    }
-
-    public void setNominatorAwardQuantity(int nominatorAwardQuantity) {
-        this.nominatorAwardQuantity = nominatorAwardQuantity;
-    }
+    private double nominatorGivenAwardAmount;
+    private int nominatorGivenAwardQuantity;
 
     public Nominator() {
     }
@@ -62,6 +45,27 @@ public class Nominator {
         this.nominatorAwardAmountLimit = nominatorAwardAmountLimit;
     }
 
+    public double getNominatorGivenAwardAmount() {
+        return nominatorGivenAwardAmount;
+    }
+
+    public void setNominatorGivenAwardAmount(double nominatorGivenAwardAmount) {
+        this.nominatorGivenAwardAmount = nominatorGivenAwardAmount;
+    }
+
+    public int getNominatorGivenAwardQuantity() {
+        return nominatorGivenAwardQuantity;
+    }
+
+    public void setNominatorGivenAwardQuantity(int nominatorGivenAwardQuantity) {
+        this.nominatorGivenAwardQuantity = nominatorGivenAwardQuantity;
+    }
+
+    /**  Method creates nomination and provides information about it values
+     *
+     * @param award - chosen award for nomination
+     * @param nominees - list of the award recipients
+     */
     public void nominate(Award award, Nominee[] nominees) {
         for (Nominee n : nominees) {
             n.receiveAward(award);
