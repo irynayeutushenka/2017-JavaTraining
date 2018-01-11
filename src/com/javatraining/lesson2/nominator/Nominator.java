@@ -61,15 +61,43 @@ public class Nominator {
         this.nominatorGivenAwardQuantity = nominatorGivenAwardQuantity;
     }
 
-    /**  Method creates nomination and provides information about it values
+    /**
+     * Method creates nomination for one nominee and provides information about it's values
      *
-     * @param award - chosen award for nomination
-     * @param nominees - list of the award recipients
+     * @param nominee - the award recipient
+     * @param award   - chosen award for nomination
      */
-    public void nominate(Award award, Nominee[] nominees) {
+    public void nominate(Nominee nominee, Award award) {
+        nominee.receiveAward(award);
+        System.out.println(String.format("Award details for Nominator: Award value - %s, Award Currency - %s, Nominee - %s",
+                award.getValue(), award.getCurrency(), nominee.getName()));
+    }
+
+    /**
+     * Method creates nomination for several nominees and provides information about it's values
+     *
+     * @param nominees - list of the award recipients
+     * @param award    - chosen award for nomination
+     */
+    public void nominate(Nominee[] nominees, Award award) {
         for (Nominee n : nominees) {
             n.receiveAward(award);
-            System.out.println(String.format("Award details for Nominator: Award value - %s, Award Currency - %s, Nominee - %s", award.getValue(), award.getCurrency(), n.getName()));
+            System.out.println(String.format("Award details for Nominator: Award value - %s, Award Currency - %s, Nominee - %s",
+                    award.getValue(), award.getCurrency(), n.getName()));
+        }
+    }
+
+    /**
+     * Method creates several nominations for one nominee and provides information about it's values
+     *
+     * @param nominee - the award recipient
+     * @param awardList - list of the awards
+     */
+    public void nominate(Nominee nominee, Award[] awardList) {
+        for (Award award : awardList) {
+            nominee.receiveAward(award);
+            System.out.println(String.format("Award details for Nominator: Award value - %s, Award Currency - %s, Nominee - %s",
+                    award.getValue(), award.getCurrency(), nominee.getName()));
         }
     }
 }

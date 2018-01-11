@@ -71,5 +71,4 @@ public class Award {
     public void setSoli(float soli) {
         this.soli = soli;
     }
-
 }

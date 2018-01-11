@@ -73,13 +73,17 @@ public class Nominee {
     public void receiveAward(Award award) {
         float awardValueWithSoli = award.getValue() * award.getSoli();
         if (award.getSoli() == 0.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value - %s, Award Currency - %s. No SOLI applied", award.getValue(), award.getCurrency()));
+            System.out.println(String.format("Award Details for Recipient: Award Value - %s, Award Currency - %s. No SOLI applied",
+                    award.getValue(), award.getCurrency()));
         } else if (award.getSoli() < 1.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Gone - %s.", awardValueWithSoli, award.getCurrency(), award.getSoli(), (100 - (award.getSoli() * 100) + "%")));
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Gone - %s.",
+                    awardValueWithSoli, award.getCurrency(), award.getSoli(), (100 - (award.getSoli() * 100) + "%")));
         } else if (award.getSoli() > 1.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Added - %s.", awardValueWithSoli, award.getCurrency(), award.getSoli(), ((award.getSoli() * 100 - 100) + "%")));
-        } else if (award.getSoli() == 1.0f) {
-            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Award value hasn't changed.", awardValueWithSoli, award.getCurrency(), award.getSoli()));
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Added - %s.",
+                    awardValueWithSoli, award.getCurrency(), award.getSoli(), ((award.getSoli() * 100 - 100) + "%")));
+        } else {
+            System.out.println(String.format("Award Details for Recipient: Award Value with SOLI - %s, Award Currency - %s, SOLI value - %s, Award value hasn't changed.",
+                    awardValueWithSoli, award.getCurrency(), award.getSoli()));
         }
     }
 }

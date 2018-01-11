@@ -11,24 +11,32 @@ import com.javatraining.lesson2.nominee.Nominee;
 
 public class LimitCalculation {
 
+    public enum LimitType {
+        NOMINATOR_AWARD_QUANTITY_LIMIT,
+        NOMINATOR_AWARD_AMOUNT_LIMIT,
+        NOMINEE_AWARD_QUANTITY_LIMIT,
+        NOMINEE_AWARD_AMOUNT_LIMIT
+    }
+
     /**
      * Nominator дает авадру Nominee пока не достигнет nominatorAwardQuantityLimit
      * IF - ELSE; FOR
      *
-     * @param award         - chosen award for nomination
      * @param nominator     - nominator of the award
+     * @param award         - chosen award for nomination
      * @param nomineesArray - list of the award recipients
      */
-    public static void useNominatorAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
+    public static void useNominatorAwardQuantityLimit(Nominator nominator, Award award, Nominee[] nomineesArray) {
         int nominatorAwardQuantity = 0;
-        String NominatorAwardQuantityLimit = "NominatorAwardQuantityLimit";
-        for (int i = 0; i < 100; i++) {
-            if (nominatorAwardQuantity < nominator.getNominatorAwardQuantityLimit()) {
-                nominator.nominate(award, nomineesArray);
+        int maxAllowedAwardQuantity = 100;
+        for (int i = 0; i < maxAllowedAwardQuantity; i++) {
+            if (nominatorAwardQuantity + 1 <= nominator.getNominatorAwardQuantityLimit()) {
+                nominator.nominate(nomineesArray, award);
                 nominatorAwardQuantity++;
-                System.out.println("Nomination created " + (nominatorAwardQuantity));
+                System.out.println(String.format("Total amount of given nominations - %s", nominatorAwardQuantity));
             } else {
-                limitMessage(NominatorAwardQuantityLimit);
+                LimitType limitType = LimitType.NOMINATOR_AWARD_QUANTITY_LIMIT;
+                limitMessage(limitType);
                 break;
             }
         }
@@ -38,90 +46,88 @@ public class LimitCalculation {
      * Nominator дает авадру Nominee пока не достигнет nominatorAwardAmountLimit
      * WHILE
      *
-     * @param award         - chosen award for nomination
      * @param nominator     - nominator of the award
+     * @param award         - chosen award for nomination
      * @param nomineesArray - list of the award recipients
      */
-    public static void useNominatorAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
-        int nominatorAmount = 0;
-        String NominatorAwardAmountLimit = "NominatorAwardAmountLimit";
-        while (nominatorAmount + award.getValue() < nominator.getNominatorAwardAmountLimit()) {
-            nominator.nominate(award, nomineesArray);
-            nominatorAmount = nominatorAmount + award.getValue();
-            System.out.println("Nomination created");
+    public static void useNominatorAwardAmountLimit(Nominator nominator, Award award, Nominee[] nomineesArray) {
+        int nominatorAwardAmount = 0;
+        while (nominatorAwardAmount + award.getValue() <= nominator.getNominatorAwardAmountLimit()) {
+            nominator.nominate(nomineesArray, award);
+            nominatorAwardAmount += award.getValue();
+            System.out.println(String.format("Total value of given nominations - %s", nominatorAwardAmount));
         }
-        limitMessage(NominatorAwardAmountLimit);
+        LimitType limitType = LimitType.NOMINATOR_AWARD_AMOUNT_LIMIT;
+        limitMessage(limitType);
     }
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nomineeAwardQuantityLimit
-     * DO - WHILE
+     * *
      *
-     * @param award         - chosen award for nomination
-     * @param nominator     - nominator of the award
-     * @param nomineesArray - list of the award recipients
+     * @param nominee    - award recipient
+     * @param awardsList - chosen award for nomination
+     * @param nominator  - nominator of the award
      */
-    public static void useNomineeAwardQuantityLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
-        String NomineeAwardQuantityLimit = "NomineeAwardQuantityLimit";
-        for (Nominee nominee : nomineesArray) {
-            int count = 0;
-            do {
-                count++;
-                nominator.nominate(award, nomineesArray);
-                System.out.println("Nomination created " + count);
-            } while (count < nominee.getNomineeAwardQuantityLimit());
-            limitMessage(NomineeAwardQuantityLimit);
+    public static void useNomineeAwardQuantityLimit(Nominee nominee, Award[] awardsList, Nominator nominator) {
+        int recipientAwardQuantity = 0;
+        for (int i = 0; i < awardsList.length; i++) {
+            if (recipientAwardQuantity + 1 <= nominee.getNomineeAwardQuantityLimit()) {
+                nominator.nominate(nominee, awardsList[i]);
+                recipientAwardQuantity++;
+                System.out.println(String.format("Total amount of received nominations - %s", recipientAwardQuantity));
+            } else {
+                LimitType limitType = LimitType.NOMINEE_AWARD_QUANTITY_LIMIT;
+                limitMessage(limitType);
+                break;
+            }
         }
     }
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nomineeAwardAmountLimit
-     * IF - IF, FOR
+     * IF - ELSE, FOREACH
      *
-     * @param award         - chosen award for nomination
-     * @param nominator     - nominator of the award
-     * @param nomineesArray - list of the award recipients
+     * @param nominee   - award recipient
+     * @param awardList - chosen award for nomination
+     * @param nominator - nominator of the award
      */
-    public static void useNomineeAwardAmountLimit(Award award, Nominator nominator, Nominee[] nomineesArray) {
-        String NomineeAwardAmountLimit = "NomineeAwardAmountLimit";
-        for (Nominee nominee : nomineesArray) {
-            int nomineeAmount = 0;
-            for (int i = 0; i < 100; i++) {
-                if (nomineeAmount + award.getValue() <= nominee.getNomineeAwardAmountLimit()) {
-                    nominator.nominate(award, nomineesArray);
-                    System.out.println("Nomination created " + (i + 1));
-                    nomineeAmount += award.getValue();
-                }
-                if (nomineeAmount > nominee.getNomineeAwardAmountLimit()) {
-                    break;
-                }
+    public static void useNomineeAwardAmountLimit(Nominee nominee, Award[] awardList, Nominator nominator) {
+        int nomineeAwardAmount = 0;
+        for (Award award : awardList) {
+            if (nomineeAwardAmount + award.getValue() <= nominee.getNomineeAwardAmountLimit()) {
+                nominator.nominate(nominee, award);
+                nomineeAwardAmount += award.getValue();
+                System.out.println(String.format("Total value of received nominations - %s", nomineeAwardAmount));
+            } else {
+                LimitType limitType = LimitType.NOMINEE_AWARD_AMOUNT_LIMIT;
+                limitMessage(limitType);
+                break;
             }
-            limitMessage(NomineeAwardAmountLimit);
         }
     }
 
     /**
-     * Returns appropriate message on limit reaching
+     * Returns appropriate message on specific limit type reaching
      *
-     * @param limitString - string specifying the limit type
+     * @param limitType - the limit type
      */
-    private static void limitMessage(String limitString) {
-        switch (limitString) {
-            case "NominatorAwardQuantityLimit":
-                System.out.println("Award Quantity Limit for Nominator is reached" + "\n");
+    private static void limitMessage(LimitType limitType) {
+        switch (limitType) {
+            case NOMINATOR_AWARD_QUANTITY_LIMIT:
+                System.out.println("Award Quantity Limit for Nominator is reached");
                 break;
-            case "NominatorAwardAmountLimit":
-                System.out.println("Award Amount Limit for Nominator is reached" + "\n");
+            case NOMINATOR_AWARD_AMOUNT_LIMIT:
+                System.out.println("Award Amount Limit for Nominator is reached");
                 break;
-            case "NomineeAwardQuantityLimit":
-                System.out.println("Award Quantity Limit for Recipient is reached" + "\n");
+            case NOMINEE_AWARD_QUANTITY_LIMIT:
+                System.out.println("Award Quantity Limit for Recipient is reached");
                 break;
-            case "NomineeAwardAmountLimit":
-                System.out.println("Award Amount Limit for Recipient is reached" + "\n");
+            case NOMINEE_AWARD_AMOUNT_LIMIT:
+                System.out.println("Award Amount Limit for Recipient is reached");
                 break;
             default:
-                System.out.println("Unknown Limit" + "\n");
-                break;
+                System.out.println("Unknown Limit");
         }
     }
 
@@ -151,7 +157,8 @@ public class LimitCalculation {
         if (nominatorAmount <= nominator.getNominatorAwardAmountLimit()) {
             checkNominatorAwardQuantityLimit(award, nominator, nomineesArray);
         } else {
-            System.out.println(String.format("AwardAmountLimit for nominator is reached, Award Amount Received by Nominator - %s" + "\n", nominator.getNominatorGivenAwardAmount()));
+            System.out.println(String.format("AwardAmountLimit for nominator is reached, Award Amount Received by Nominator - %s",
+                    nominator.getNominatorGivenAwardAmount()));
         }
     }
 
@@ -170,10 +177,10 @@ public class LimitCalculation {
         if (nominatorAwardQuantity <= nominator.getNominatorAwardQuantityLimit()) {
             checkNomineeAwardAmountLimit(award, nominator, nomineesArray);
         } else {
-            System.out.println(String.format("AwardQuantityLimit for nominator is reached, Award Quantity Received by Nominator - %s" + "\n", nominator.getNominatorGivenAwardQuantity()));
+            System.out.println(String.format("AwardQuantityLimit for nominator is reached, Award Quantity Received by Nominator - %s",
+                    nominator.getNominatorGivenAwardQuantity()));
         }
     }
-
 
     /**
      * Part of checkAllLimits method
@@ -191,7 +198,8 @@ public class LimitCalculation {
             if (nomineeAmount <= nominee.getNomineeAwardAmountLimit()) {
                 checkNomineeAwardQuantityLimit(award, nominator, nomineesArray);
             } else {
-                System.out.println(String.format("AwardAmountLimit for recipient is reached, Award Amount Received by Recipient - %s" + "\n", nominee.getNomineeReceivedAwardAmount()));
+                System.out.println(String.format("AwardAmountLimit for recipient is reached, Award Amount Received by Recipient - %s",
+                        nominee.getNomineeReceivedAwardAmount()));
             }
         }
     }
@@ -210,15 +218,17 @@ public class LimitCalculation {
         for (Nominee nominee : nomineesArray) {
             int nomineeAwardQuantity = nominee.getNomineeReceivedAwardQuantity() + 1;
             if ((nomineeAwardQuantity) <= nominee.getNomineeAwardQuantityLimit()) {
-                nominator.nominate(award, nomineesArray);
+                nominator.nominate(nomineesArray, award);
                 nominator.setNominatorGivenAwardAmount(nominator.getNominatorGivenAwardAmount() + award.getValue());
                 nominator.setNominatorGivenAwardQuantity(nominator.getNominatorGivenAwardQuantity() + 1);
                 nominee.setNomineeReceivedAwardAmount(nominee.getNomineeReceivedAwardAmount() + award.getValue());
                 nominee.setNomineeReceivedAwardQuantity(nominee.getNomineeReceivedAwardQuantity() + 1);
-                System.out.println(String.format("Nominator AwardAmount - %s, AwardQuantity - %s; Recipient AwardAmount - %s, Recipient AwardQuantity - %s" + "\n",
-                        nominator.getNominatorGivenAwardAmount(), nominator.getNominatorGivenAwardQuantity(), nominee.getNomineeReceivedAwardAmount(), nominee.getNomineeReceivedAwardQuantity()));
+                System.out.println(String.format("Nominator AwardAmount - %s, AwardQuantity - %s; Recipient AwardAmount - %s, Recipient AwardQuantity - %s",
+                        nominator.getNominatorGivenAwardAmount(), nominator.getNominatorGivenAwardQuantity(),
+                        nominee.getNomineeReceivedAwardAmount(), nominee.getNomineeReceivedAwardQuantity()));
             } else {
-                System.out.println(String.format("AwardQuantityLimit for recipient is reached, Award Quantity Received by Recipient - %s" + "\n", nominee.getNomineeReceivedAwardQuantity()));
+                System.out.println(String.format("AwardQuantityLimit for recipient is reached, Award Quantity Received by Recipient - %s",
+                        nominee.getNomineeReceivedAwardQuantity()));
             }
         }
     }

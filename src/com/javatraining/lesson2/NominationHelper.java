@@ -8,7 +8,6 @@
 package com.javatraining.lesson2;
 
 import com.javatraining.lesson2.award.Award;
-
 import java.util.Random;
 
 public class NominationHelper {
@@ -38,7 +37,7 @@ public class NominationHelper {
      * Z = a random whole number i.e. 3
      * P = award value;
      *
-     * @param award - chosen award for nomination
+     * @param award      - chosen award for nomination
      * @param population - total count of employee's awards without soli
      * @return quantity parameter
      */

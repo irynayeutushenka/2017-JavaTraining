@@ -19,6 +19,8 @@ public class NominationCreationWithLimits_Lesson4 {
         Award award2 = new Award(200);
         Award award3 = new Award(500);
         Award award4 = new Award(50);
+        Award award5 = new Award(1000);
+        Award [] awardsArray1 = new Award[]{award1, award2, award3, award4, award5};
 
         Nominator nominator1 = new Nominator();
         nominator1.setNominatorAwardQuantityLimit(5);
@@ -34,9 +36,9 @@ public class NominationCreationWithLimits_Lesson4 {
         LimitCalculation.checkAllLimits(award3, nominator1, nomineesArray1);
         LimitCalculation.checkAllLimits(award4, nominator1, nomineesArray1);
 
-        LimitCalculation.useNominatorAwardQuantityLimit(award1, nominator1, nomineesArray1);
-        LimitCalculation.useNominatorAwardAmountLimit(award1, nominator1, nomineesArray1);
-        LimitCalculation.useNomineeAwardQuantityLimit(award1, nominator1, nomineesArray1);
-        LimitCalculation.useNomineeAwardAmountLimit(award1, nominator1, nomineesArray1);
+        LimitCalculation.useNominatorAwardQuantityLimit(nominator1, award1, nomineesArray1);
+        LimitCalculation.useNominatorAwardAmountLimit(nominator1, award1, nomineesArray1);
+        LimitCalculation.useNomineeAwardQuantityLimit(nominee1, awardsArray1, nominator1);
+        LimitCalculation.useNomineeAwardAmountLimit(nominee1, awardsArray1, nominator1);
     }
 }

@@ -34,12 +34,12 @@ public class NominationCreationAndQuantityCalculation {
         Nominator nominator1 = new Nominator();
         nominator1.setName("Alan");
 
-        nominator1.nominate(award1, nomineesArray1);
-        nominator1.nominate(award2, nomineesArray2);
-        nominator1.nominate(award3, nomineesArray3);
-        nominator1.nominate(award4, nomineesArray4);
-        nominator1.nominate(award5, nomineesArray5);
-        nominator1.nominate(award6, nomineesArray5);
+        nominator1.nominate(nomineesArray1, award1);
+        nominator1.nominate(nomineesArray2, award2);
+        nominator1.nominate(nomineesArray3, award3);
+        nominator1.nominate(nomineesArray4, award4);
+        nominator1.nominate(nomineesArray5, award5);
+        nominator1.nominate(nomineesArray5, award6);
 
         Award[] awardArrayPerRecipient1 = new Award[]{award1, award4};
         Award[] awardArrayPerRecipient2 = new Award[]{award2, award4};
@@ -63,31 +63,39 @@ public class NominationCreationAndQuantityCalculation {
          * Comparison of quantities of the awards for the same recipient
          */
         if (quantityAward1Recipient1 > quantityAward4Recipient1) {
-            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is greater than quantity of award4 of the Recipient 1 (%s)", quantityAward1Recipient1, quantityAward4Recipient1));
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is greater than quantity of award4 of the Recipient 1 (%s)",
+                    quantityAward1Recipient1, quantityAward4Recipient1));
         } else if (quantityAward1Recipient1 < quantityAward4Recipient1) {
-            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is less than quantity of award4 of the Recipient 1 (%s)", quantityAward1Recipient1, quantityAward4Recipient1));
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is less than quantity of award4 of the Recipient 1 (%s)",
+                    quantityAward1Recipient1, quantityAward4Recipient1));
         } else if (quantityAward1Recipient1 == quantityAward4Recipient1) {
-            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 1 (%s)", quantityAward1Recipient1, quantityAward4Recipient1));
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 1 (%s)",
+                    quantityAward1Recipient1, quantityAward4Recipient1));
         }
 
         /**
          * Comparison of quantities of the awards for the different recipients
          */
         if (quantityAward2Recipient2 >= quantityAward3Recipient3) {
-            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is greater or equal than quantity of award3 of the Recipient 3 (%s)", quantityAward2Recipient2, quantityAward3Recipient3));
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is greater or equal than quantity of award3 of the Recipient 3 (%s)",
+                    quantityAward2Recipient2, quantityAward3Recipient3));
         } else if (quantityAward2Recipient2 <= quantityAward3Recipient3) {
-            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is less or equal than quantity of award3 of the Recipient 3 (%s)", quantityAward2Recipient2, quantityAward3Recipient3));
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is less or equal than quantity of award3 of the Recipient 3 (%s)",
+                    quantityAward2Recipient2, quantityAward3Recipient3));
         }else if (quantityAward2Recipient2 != quantityAward3Recipient3) {
-            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is not equal than quantity of award3 of the Recipient 3 (%s)", quantityAward2Recipient2, quantityAward3Recipient3));
+            System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is not equal than quantity of award3 of the Recipient 3 (%s)",
+                    quantityAward2Recipient2, quantityAward3Recipient3));
         }
 
         /**
          * Comparison of quantities of the awards for the different recipients
          */
         if ((quantityAward1Recipient1 == quantityAward4Recipient2) && (quantityAward1Recipient1 == quantityAward3Recipient3)) {
-            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s), quantity of the award4 of the Recipient 2 (%s) and quantity of the award3 of the Recipient 3 (%s) are equal", quantityAward1Recipient1, quantityAward4Recipient2, quantityAward3Recipient3));
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s), quantity of the award4 of the Recipient 2 (%s) and quantity of the award3 of the Recipient 3 (%s) are equal",
+                    quantityAward1Recipient1, quantityAward4Recipient2, quantityAward3Recipient3));
         } else if ((quantityAward1Recipient1 == quantityAward4Recipient2) || (quantityAward1Recipient1 == quantityAward3Recipient3)) {
-            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 2 (%s) or to quantity of the award3 of the Recipient 3 (%s)", quantityAward1Recipient1, quantityAward4Recipient2, quantityAward3Recipient3));
+            System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 2 (%s) or to quantity of the award3 of the Recipient 3 (%s)",
+                    quantityAward1Recipient1, quantityAward4Recipient2, quantityAward3Recipient3));
         }
 
     }
