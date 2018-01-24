@@ -5,7 +5,7 @@
  */
 
 
-package com.javatraining.lesson2;
+package com.javatraining.lesson2.utils;
 
 import com.javatraining.lesson2.award.Award;
 import java.util.Random;
@@ -18,7 +18,7 @@ public class NominationHelper {
      * @param awardArrayPerRecipient - list of awards received by the recipient
      * @return population - total count of employee's awards without soli
      */
-    static int countPopulation(Award awardArrayPerRecipient[]) {
+    public static int countPopulation(Award awardArrayPerRecipient[]) {
         int count = 0;
         for (Award a : awardArrayPerRecipient) {
             if (a.getSoli() != 0.0f) {

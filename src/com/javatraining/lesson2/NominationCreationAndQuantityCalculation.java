@@ -9,6 +9,11 @@ package com.javatraining.lesson2;
 import com.javatraining.lesson2.award.Award;
 import com.javatraining.lesson2.nominator.Nominator;
 import com.javatraining.lesson2.nominee.Nominee;
+import com.javatraining.lesson2.person.Person;
+import com.javatraining.lesson2.utils.DisplayUserInfoHelper;
+import com.javatraining.lesson2.utils.NominationHelper;
+
+import java.util.ArrayList;
 
 public class NominationCreationAndQuantityCalculation {
     public static void main(String[] args) {
@@ -20,10 +25,12 @@ public class NominationCreationAndQuantityCalculation {
         Award award5 = new Award(200, 1.2f); //award with default currency with SOLI
         Award award6 = new Award(500, 10f); //award with default currency with SOLI
 
-
         Nominee nominee1 = new Nominee("Pete");
+        nominee1.displayPersonInformation();
         Nominee nominee2 = new Nominee("Mike");
+        nominee2.displayPersonInformation();
         Nominee nominee3 = new Nominee("Adam");
+        nominee3.displayPersonInformation();
 
         Nominee[] nomineesArray1 = new Nominee[]{nominee1}; //awards 1 and 4 (1 with SOLI)
         Nominee[] nomineesArray2 = new Nominee[]{nominee2}; //awards 2 and 4 (1 with SOLI)
@@ -31,8 +38,22 @@ public class NominationCreationAndQuantityCalculation {
         Nominee[] nomineesArray4 = new Nominee[]{nominee1, nominee2};
         Nominee[] nomineesArray5 = new Nominee[]{new Nominee("John"), new Nominee("Dave")};
 
-        Nominator nominator1 = new Nominator();
-        nominator1.setName("Alan");
+        Nominator nominator1 = new Nominator("Alan");
+        nominator1.displayPersonInformation();
+
+        Nominator nominator2 = new Nominator();
+        nominator2.displayPersonInformation();
+
+        Person nominee4 = new Nominee("Bob");
+        Person nominator3 = new Nominator("David");
+        nominee4.displayPersonInformation();
+        nominator3.displayPersonInformation();
+
+        ArrayList<Person> personList = new ArrayList<>();
+        personList.add(nominator1);
+        personList.add(nominee1);
+        DisplayUserInfoHelper.displayUserInfo(personList);
+
 
         nominator1.nominate(nomineesArray1, award1);
         nominator1.nominate(nomineesArray2, award2);
@@ -44,7 +65,6 @@ public class NominationCreationAndQuantityCalculation {
         Award[] awardArrayPerRecipient1 = new Award[]{award1, award4};
         Award[] awardArrayPerRecipient2 = new Award[]{award2, award4};
         Award[] awardArrayPerRecipient3 = new Award[]{award3, award6};
-
 
         int populationForRecipient1 = NominationHelper.countPopulation(awardArrayPerRecipient1);
         double quantityAward1Recipient1 = NominationHelper.calculateQuantity(award1, populationForRecipient1);
@@ -82,7 +102,7 @@ public class NominationCreationAndQuantityCalculation {
         } else if (quantityAward2Recipient2 <= quantityAward3Recipient3) {
             System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is less or equal than quantity of award3 of the Recipient 3 (%s)",
                     quantityAward2Recipient2, quantityAward3Recipient3));
-        }else if (quantityAward2Recipient2 != quantityAward3Recipient3) {
+        } else if (quantityAward2Recipient2 != quantityAward3Recipient3) {
             System.out.println(String.format("Quantity of award2 of the Recipient 2 (%s) is not equal than quantity of award3 of the Recipient 3 (%s)",
                     quantityAward2Recipient2, quantityAward3Recipient3));
         }
@@ -97,6 +117,5 @@ public class NominationCreationAndQuantityCalculation {
             System.out.println(String.format("Quantity of award1 of the Recipient 1 (%s) is equal to quantity of award4 of the Recipient 2 (%s) or to quantity of the award3 of the Recipient 3 (%s)",
                     quantityAward1Recipient1, quantityAward4Recipient2, quantityAward3Recipient3));
         }
-
     }
 }

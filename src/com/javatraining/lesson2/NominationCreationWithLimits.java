@@ -11,7 +11,7 @@ import com.javatraining.lesson2.award.LimitCalculation;
 import com.javatraining.lesson2.nominator.Nominator;
 import com.javatraining.lesson2.nominee.Nominee;
 
-public class NominationCreationWithLimits_Lesson4 {
+public class NominationCreationWithLimits {
 
     public static void main(String[] args) {
 
@@ -23,13 +23,13 @@ public class NominationCreationWithLimits_Lesson4 {
         Award [] awardsArray1 = new Award[]{award1, award2, award3, award4, award5};
 
         Nominator nominator1 = new Nominator();
-        nominator1.setNominatorAwardQuantityLimit(5);
-        nominator1.setNominatorAwardAmountLimit(500.5);
+        nominator1.setAwardQuantityLimit(5);
+        nominator1.setAwardAmountLimit(500.5);
 
         Nominee nominee1 = new Nominee("Bill");
         Nominee[] nomineesArray1 = new Nominee[]{nominee1};
-        nominee1.setNomineeAwardQuantityLimit(2);
-        nominee1.setNomineeAwardAmountLimit(1000.5);
+        nominee1.setAwardQuantityLimit(2);
+        nominee1.setAwardAmountLimit(1000.5);
 
         LimitCalculation.checkAllLimits(award1, nominator1, nomineesArray1);
         LimitCalculation.checkAllLimits(award2, nominator1, nomineesArray1);

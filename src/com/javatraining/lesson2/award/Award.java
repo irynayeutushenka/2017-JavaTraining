@@ -6,8 +6,6 @@
 
 package com.javatraining.lesson2.award;
 
-import java.util.Random;
-
 public class Award {
 
     static { //Static initialization block - runs once when the class is initialized;
