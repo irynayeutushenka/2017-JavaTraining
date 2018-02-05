@@ -23,6 +23,9 @@ public class LimitCalculation {
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nominatorAwardQuantityLimit
+     * Method checks if limit to be reached after chosen award is given:
+     * if not a new award is created,
+     * if yes - the corresponding message is displayed
      * IF - ELSE; FOR
      *
      * @param nominator     - nominator of the award
@@ -32,7 +35,8 @@ public class LimitCalculation {
     public static void useNominatorAwardQuantityLimit(Nominator nominator, Award award, Nominee[] nomineesArray) {
         int maxAllowedAwardQuantity = 100;
         for (int i = 0; i < maxAllowedAwardQuantity; i++) {
-            if (nominator.getCurrentAwardQuantity() + 1 <= nominator.getAwardQuantityLimit()) {
+            int futureQuantity = nominator.getCurrentAwardQuantity() + 1;
+            if (!nominator.isAwardQuantityLimitReached(futureQuantity, nominator.getAwardQuantityLimit())) {
                 nominator.nominate(nomineesArray, award);
                 nominator.setCurrentAwardQuantity(nominator.getCurrentAwardQuantity() + 1);
                 System.out.println(String.format("Total amount of given nominations - %s", nominator.getCurrentAwardQuantity()));
@@ -45,6 +49,9 @@ public class LimitCalculation {
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nominatorAwardAmountLimit
+     * Method checks if limit to be reached after chosen award is given:
+     * if not a new award is created,
+     * if yes - the corresponding message is displayed
      * WHILE
      *
      * @param nominator     - nominator of the award
@@ -52,7 +59,7 @@ public class LimitCalculation {
      * @param nomineesArray - list of the award recipients
      */
     public static void useNominatorAwardAmountLimit(Nominator nominator, Award award, Nominee[] nomineesArray) {
-        while (nominator.getCurrentAwardAmount() + award.getValue() <= nominator.getAwardAmountLimit()) {
+        while (!nominator.isAwardAmountLimitReached(nominator.getCurrentAwardAmount() + award.getValue(), nominator.getAwardAmountLimit())) {
             nominator.nominate(nomineesArray, award);
             nominator.setCurrentAwardAmount(nominator.getCurrentAwardAmount() + award.getValue());
             System.out.println(String.format("Total value of given nominations - %s", nominator.getCurrentAwardAmount()));
@@ -62,6 +69,9 @@ public class LimitCalculation {
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nomineeAwardQuantityLimit
+     * Method checks if limit to be reached after chosen award is given:
+     * if not a new award is created,
+     * if yes - the corresponding message is displayed
      * *
      *
      * @param nominee    - award recipient
@@ -70,7 +80,8 @@ public class LimitCalculation {
      */
     public static void useNomineeAwardQuantityLimit(Nominee nominee, Award[] awardsList, Nominator nominator) {
         for (int i = 0; i < awardsList.length; i++) {
-            if (nominee.getCurrentAwardQuantity() + 1 <= nominee.getAwardQuantityLimit()) {
+            int futureQuantity = nominee.getCurrentAwardQuantity() + 1;
+            if (!nominee.isAwardQuantityLimitReached(futureQuantity, nominee.getAwardQuantityLimit())) {
                 nominator.nominate(nominee, awardsList[i]);
                 nominee.setCurrentAwardQuantity(nominee.getCurrentAwardQuantity() + 1);
                 System.out.println(String.format("Total amount of received nominations - %s", nominee.getCurrentAwardQuantity()));
@@ -83,6 +94,9 @@ public class LimitCalculation {
 
     /**
      * Nominator дает авадру Nominee пока не достигнет nomineeAwardAmountLimit
+     * Method checks if limit to be reached after chosen award is given:
+     * if not a new award is created,
+     * if yes - the corresponding message is displayed
      * IF - ELSE, FOREACH
      *
      * @param nominee   - award recipient
@@ -91,7 +105,8 @@ public class LimitCalculation {
      */
     public static void useNomineeAwardAmountLimit(Nominee nominee, Award[] awardList, Nominator nominator) {
         for (Award award : awardList) {
-            if (nominee.getCurrentAwardAmount() + award.getValue() <= nominee.getAwardAmountLimit()) {
+            double futureAmount = nominee.getCurrentAwardAmount() + award.getValue();
+            if (!nominee.isAwardAmountLimitReached(futureAmount, nominee.getAwardAmountLimit())) {
                 nominator.nominate(nominee, award);
                 nominee.setCurrentAwardAmount(nominee.getCurrentAwardAmount() + award.getValue());
                 System.out.println(String.format("Total value of received nominations - %s", nominee.getCurrentAwardAmount()));
@@ -102,7 +117,7 @@ public class LimitCalculation {
         }
     }
 
-     /**
+    /**
      * Returns appropriate message on specific limit type reaching
      *
      * @param limit type of limit

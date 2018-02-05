@@ -8,6 +8,10 @@
 package com.javatraining.lesson2.utils;
 
 import com.javatraining.lesson2.award.Award;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 
 public class NominationHelper {
@@ -56,5 +60,34 @@ public class NominationHelper {
         double quantity = m / n;
         System.out.println(String.format("Award Value - %s, Population - %s, Calculated Quantity - %s", award.getValue(), population, quantity));
         return quantity;
+    }
+
+    /**
+     * Method returns the list of awards of defined type
+     *
+     * @param awards List of awards
+     * @param type
+     */
+    public static void printAwardsOfDefinedType(ArrayList<Award> awards, Enum type) {
+        for (Award a : awards) {
+            if (a.getType() == type)
+                System.out.println(a.getId());
+        }
+
+    }
+
+    /**
+     * Method returns the award types of awards from the list
+     * @param awards List of awards
+     */
+    public static void printAwardsTypes(ArrayList<Award> awards) {
+        HashSet<Enum> typesSet = new HashSet<>();
+        for (Award a : awards) {
+            typesSet.add(a.getType());
+        }
+        Iterator<Enum> iterator = typesSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }

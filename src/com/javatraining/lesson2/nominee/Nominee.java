@@ -24,12 +24,17 @@ public class Nominee extends Person {
         System.out.println("Nominee class is initialized - info from static initialization block");
     }
 
+    /**
+     * Nominee constructor with name parameter
+     *
+     * @param name - user name
+     */
     public Nominee(String name) {
         super(name);
     }
 
     /**
-     * Method that returns information about user recipient role and his name
+     * Method that provides information about user recipient role and his name
      */
     @Override
     public void displayPersonInformation() {
@@ -41,11 +46,12 @@ public class Nominee extends Person {
     }
 
     /**
-     * Additional information about recipient
+     * Method that provides additional information about recipient
      */
-    public void infoRecipient(){
+    public void infoRecipient() {
         System.out.println("I'm a recipient and I proud of it");
     }
+
 
     /**
      * Method provides information about award to be received by the recipient and applied soli.

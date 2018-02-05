@@ -20,15 +20,23 @@ public class Nominator extends Person {
         System.out.println("Nominator class is initialized - info from static initialization block");
     }
 
+    /**
+     * Nominator constructor without parameters
+     */
     public Nominator() {
     }
 
+    /**
+     * Nominator constructor with name parameter
+     *
+     * @param name - user name
+     */
     public Nominator(String name) {
         super(name);
     }
 
     /**
-     * Method that returns information about user recipient role and his name
+     * Method that provides information about user recipient role and his name
      */
     @Override
     public void displayPersonInformation() {
@@ -40,9 +48,9 @@ public class Nominator extends Person {
     }
 
     /**
-     * Additional information about nominator
+     * Method that provides additional information about nominator
      */
-    public void infoNominator(){
+    public void infoNominator() {
         System.out.println("I'm a nominator and I proud of it");
     }
 

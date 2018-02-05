@@ -23,15 +23,13 @@ public class DisplayUserInfoHelper {
     public static void displayUserInfo(List<Person> personList) {
         for (Person p : personList) {
             p.displayPersonInformation();
-            if (p instanceof Nominator){
+            if (p instanceof Nominator) {
                 Nominator n = (Nominator) p;
                 n.infoNominator();
-            }
-            else if (p instanceof Nominee){
+            } else if (p instanceof Nominee) {
                 Nominee n = (Nominee) p;
                 n.infoRecipient();
-            }
-            else {
+            } else {
                 System.out.println("Who I am?");
             }
         }

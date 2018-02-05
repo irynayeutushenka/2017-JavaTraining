@@ -7,6 +7,7 @@
 package com.javatraining.lesson2;
 
 import com.javatraining.lesson2.award.Award;
+import com.javatraining.lesson2.language.Language;
 import com.javatraining.lesson2.nominator.Nominator;
 import com.javatraining.lesson2.nominee.Nominee;
 import com.javatraining.lesson2.person.Person;
@@ -27,6 +28,7 @@ public class NominationCreationAndQuantityCalculation {
 
         Nominee nominee1 = new Nominee("Pete");
         nominee1.displayPersonInformation();
+        nominee1.displayPersonInformation(Language.ENGLISH);
         Nominee nominee2 = new Nominee("Mike");
         nominee2.displayPersonInformation();
         Nominee nominee3 = new Nominee("Adam");
